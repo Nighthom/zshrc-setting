@@ -142,5 +142,8 @@ function sdt() {
   --bind '?:toggle-preview,alt-w:toggle-preview-wrap'\
   --bind 'alt-v:execute($EDITOR {$FZF_PATH_LOC} >/dev/tty </dev/tty)'\
   --preview 'exa --color=always --tree --level=2  {} | head -200 2>/dev/null'\
+  # --preview 'lsd --color=always --tree --depth=2  {} | head -200 2>/dev/null'\
+
+
   --preview-window=right:50%) && cd "$dir"
 }
