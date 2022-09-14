@@ -164,7 +164,7 @@ function sdt() {
   # --preview 'lsd --color=always --tree --depth=2  {}'\
   # --preview 'lsd --color=always --tree --depth=2  {} | head -200 2>/dev/null'\
 
-  --preview-window=right:50%) && cd "$dir"
+  ) && cd "$dir"
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
