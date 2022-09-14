@@ -10,6 +10,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# export PATH="/bin":$PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -81,6 +82,7 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -111,10 +113,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Only changing the escape key to `jk` in insert mode, we still
+# keep using the default keybindings `^[` in other modes
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+
 set -o vi
 alias cat='bat'
+alias ls='exa'
+# alias ls='lsd'
 source ~/fzf_tab/fzf-tab.plugin.zsh
 
+# fzf custom functions
 function fif() {
   if [ ! "$#" -gt 0 ]; then echo "검색어를 입력해주세요."; return 1; fi
   rg --files-with-matches --no-messages $2 "$1" | fzf\
@@ -131,6 +140,7 @@ function fif() {
   --bind '?:toggle-preview,alt-w:toggle-preview-wrap'\
   --bind 'alt-v:execute(nvim {} >/dev/tty </dev/tty)'\
   --preview "bat --theme='OneHalfDark' --style=numbers --color=always {} | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+  # --preview "bat --style=numbers --color=always {}"
 }
 
 
@@ -151,8 +161,8 @@ function sdt() {
   --bind '?:toggle-preview,alt-w:toggle-preview-wrap'\
   --bind 'alt-v:execute($EDITOR {$FZF_PATH_LOC} >/dev/tty </dev/tty)'\
   --preview 'exa --color=always --tree --level=2  {} | head -200 2>/dev/null'\
+  # --preview 'lsd --color=always --tree --depth=2  {}'\
   # --preview 'lsd --color=always --tree --depth=2  {} | head -200 2>/dev/null'\
-
 
   --preview-window=right:50%) && cd "$dir"
 }
